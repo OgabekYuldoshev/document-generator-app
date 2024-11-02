@@ -25,22 +25,20 @@ export const router = <T extends Record<string, OperationType<any, any>>>(
 					},
 					err.status,
 				);
-			} else {
-				return c.json(
-					{
-						error: "Unknown Error",
-						message: "An unexpected error occurred",
-						type: "UnknownError",
-					},
-					500,
-				);
 			}
+			return c.json(
+				{
+					error: "Unknown Error",
+					message: "An unexpected error occurred",
+					type: "UnknownError",
+				},
+				500,
+			);
 		},
 	);
 
-	Object.entries(obj).forEach(([key, operation]) => {
+	for (const [key, operation] of Object.entries(obj)) {
 		const path = `/${key}` as const;
-
 		const operationMiddlewares: MiddlewareHandler[] = operation.middlewares.map(
 			(middleware) => {
 				const wrapperFunction = async (c: Context, next: Next) => {
@@ -80,9 +78,8 @@ export const router = <T extends Record<string, OperationType<any, any>>>(
 									cause: err,
 									message: err.message,
 								});
-							} else {
-								throw err;
 							}
+							throw err;
 						}
 
 						return operation.handler({ c, ctx, input });
@@ -95,7 +92,9 @@ export const router = <T extends Record<string, OperationType<any, any>>>(
 					return operation.handler({ c, ctx, input: undefined });
 				});
 			}
-		} else if (operation.type === "mutation") {
+		}
+
+		if (operation.type === "mutation") {
 			if (operation.schema) {
 				route.post(
 					path,
@@ -114,9 +113,8 @@ export const router = <T extends Record<string, OperationType<any, any>>>(
 									cause: err,
 									message: err.message,
 								});
-							} else {
-								throw err;
 							}
+							throw err;
 						}
 
 						return operation.handler({ c, ctx, input });
@@ -130,7 +128,8 @@ export const router = <T extends Record<string, OperationType<any, any>>>(
 				});
 			}
 		}
-	});
+
+	}
 
 	type InferInput<T> = T extends OperationType<infer I, any> ? I : {};
 	type InferOutput<T> = T extends OperationType<any, infer I> ? I : {};

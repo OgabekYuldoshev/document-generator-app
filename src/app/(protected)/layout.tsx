@@ -1,7 +1,7 @@
 import Sidebar from "@/components/sidebar"
+import { getSessionAction } from "@/modules/auth/actions"
 import { redirect } from "next/navigation"
 import type { PropsWithChildren } from "react"
-import { getSessionAction } from "../(auth)/auth/actions"
 
 export default async function ProtectedRoot({ children }: PropsWithChildren) {
   const session = await getSessionAction()

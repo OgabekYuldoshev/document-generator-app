@@ -23,8 +23,8 @@ import {
 import { toast } from "sonner"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { loginAction } from "./actions"
-import { loginSchema } from "./schema"
+import { loginAction } from "@/modules/auth/actions"
+import { loginSchema } from "@/modules/auth/schema"
 
 type LoginFormValue = z.infer<typeof loginSchema>
 export default function Page() {

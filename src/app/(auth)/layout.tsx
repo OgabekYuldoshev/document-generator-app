@@ -1,6 +1,6 @@
+import { getSessionAction } from "@/modules/auth/actions"
 import { redirect } from "next/navigation"
 import React, { type PropsWithChildren } from "react"
-import { getSessionAction } from "./auth/actions"
 
 export default async function AuthLayout({ children }: PropsWithChildren) {
   const session = await getSessionAction()

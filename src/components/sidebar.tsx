@@ -11,8 +11,8 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip"
 import NewDocumentButton from "./new-document-button"
-import { logoutAction } from "@/app/(auth)/auth/actions"
 import Nav from "./nav"
+import { logoutAction } from "@/modules/auth/actions"
 
 export default function Sidebar() {
   const [AlertProvider, onAlert] = useAlert()

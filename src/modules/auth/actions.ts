@@ -2,10 +2,10 @@
 
 import { db, type MetaUser } from "@/lib/db";
 import { createToken, verifyToken } from "@/lib/jwt";
-import type { loginSchema } from "@/schemas";
 import type { JWTPayload } from "jose";
 import { cookies } from "next/headers";
 import type { z } from "zod";
+import type { loginSchema } from "./schema";
 
 export async function loginAction(values: z.infer<typeof loginSchema>) {
   try {
@@ -17,6 +17,7 @@ export async function loginAction(values: z.infer<typeof loginSchema>) {
     if (pass !== values.pass) return { success: false, message: 'Incorrect password or login' }
 
     const token = await createToken(userWithoutPass)
+
     const cookieStore = await cookies()
 
     cookieStore.set("token", token, {

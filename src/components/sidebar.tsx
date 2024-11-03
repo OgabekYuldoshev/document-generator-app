@@ -12,6 +12,7 @@ import {
 } from "./ui/tooltip"
 import NewDocumentButton from "./new-document-button"
 import { logoutAction } from "@/app/(auth)/auth/actions"
+import Nav from "./nav"
 
 export default function Sidebar() {
   const [AlertProvider, onAlert] = useAlert()
@@ -47,6 +48,18 @@ export default function Sidebar() {
               <TooltipContent>Log out to your account</TooltipContent>
             </Tooltip>
             <NewDocumentButton />
+          </div>
+          <div className="flex flex-col px-3 gap-6 mt-6">
+            <Nav
+              title="Main"
+              items={[
+                {
+                  label: "Documents",
+                  href: "/",
+                  icon: "FileText",
+                },
+              ]}
+            />
           </div>
           <AlertProvider />
         </div>

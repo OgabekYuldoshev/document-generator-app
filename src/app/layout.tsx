@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn(inter.variable, eb_garamond.variable)}>
-      <body className="font-sans bg-brand-50 text-brand-950 antialiased dark">
+      <body className="antialiased dark">
         <Providers>{children}</Providers>
       </body>
     </html>

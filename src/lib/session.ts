@@ -1,9 +1,9 @@
-import 'server-only'
+"use server"
 
 import { cookies } from 'next/headers';
 import { verifyToken } from './jwt';
-import { JWTPayload } from 'jose';
-import { MetaUser } from './db';
+import type { JWTPayload } from 'jose';
+import type { MetaUser } from './db';
 
 export async function userSession() {
   try {
@@ -19,5 +19,16 @@ export async function userSession() {
   } catch (error) {
     console.log(error)
     return { success: false, session: null }
+  }
+}
+
+export async function deleteSession() {
+  try {
+    const cookieStore = await cookies()
+    cookieStore.delete('token')
+    return { success: true }
+  } catch (error) {
+    console.log(error)
+    return { success: false }
   }
 }

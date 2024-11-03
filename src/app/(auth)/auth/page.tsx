@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { loginSchema } from "@/schemas"
-import { z } from "zod"
+import type { z } from "zod"
 import {
   Form,
   FormControl,
@@ -42,7 +42,7 @@ export default function Page() {
       const values = await res.json()
       if (values.status === "ok") {
         toast.success("Login successful")
-        router.replace("/")
+        router.refresh()
       }
     } catch (error) {
       if (error instanceof HTTPException) {

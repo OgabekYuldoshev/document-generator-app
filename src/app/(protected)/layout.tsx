@@ -11,7 +11,7 @@ export default async function ProtectedRoot({ children }: PropsWithChildren) {
   return (
     <div className="relative flex h-screen w-full overflow-hidden">
       <Sidebar />
-      <main className="relative h-full w-full flex-1 overflow-auto transition-width p-3">
+      <main className="relative h-full w-full flex-1 overflow-auto transition-width py-3 px-6">
         {children}
       </main>
     </div>

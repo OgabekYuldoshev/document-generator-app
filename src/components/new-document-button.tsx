@@ -49,7 +49,7 @@ const NewDocumentButton = () => {
               Create a new document in one click
             </DialogDescription>
           </DialogHeader>
-          <Form />
+          <Form onClose={() => setOpen(false)} />
         </DialogContent>
       </Dialog>
     </>
@@ -57,7 +57,7 @@ const NewDocumentButton = () => {
 }
 
 type NewDocumentFormValue = z.infer<typeof newDocumentSchema>
-function Form() {
+function Form({ onClose }: { onClose(): void }) {
   const router = useRouter()
   const form = useForm<NewDocumentFormValue>({
     mode: "onTouched",
@@ -69,6 +69,7 @@ function Form() {
     if (success) {
       toast.success("Document created successfully")
       router.push(`/document/${document?.id}`)
+      onClose()
     } else {
       toast.error("Failed to create document")
     }

@@ -49,6 +49,7 @@ export async function getSessionAction() {
   try {
     const cookieStore = await cookies()
     const token = cookieStore.get('token')
+
     if (!token) return { success: false, session: null }
 
     const session = await verifyToken(token.value) as JWTPayload & Omit<MetaUser, 'pass'>

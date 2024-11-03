@@ -18,6 +18,7 @@ export async function userSession() {
 
   } catch (error) {
     console.log(error)
+    await deleteSession()
     return { success: false, session: null }
   }
 }

@@ -41,7 +41,7 @@ export const baseClient = hc<AppType>(getBaseUrl(), {
 
 		return response;
 	},
-})["api"];
+}).api;
 
 function getHandler(obj: Object, ...keys: string[]) {
 	let current = obj;

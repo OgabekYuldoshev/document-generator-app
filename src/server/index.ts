@@ -1,11 +1,10 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { handle } from "hono/vercel";
-import { authRouter } from "./router/auth";
 
 const app = new Hono().basePath("/api").use(cors());
 
-const appRouter = app.route("/auth", authRouter);
+const appRouter = app
 
 export const httpHandler = handle(app);
 

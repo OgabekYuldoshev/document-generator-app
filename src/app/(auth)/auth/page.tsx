@@ -11,7 +11,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { loginSchema } from "@/schemas"
 import type { z } from "zod"
 import {
   Form,
@@ -21,14 +20,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { client } from "@/lib/client"
 import { toast } from "sonner"
-import { HTTPException } from "hono/http-exception"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { loginAction } from "./actions"
+import { loginSchema } from "./schema"
 
 type LoginFormValue = z.infer<typeof loginSchema>
-
 export default function Page() {
   const router = useRouter()
 
@@ -36,19 +34,13 @@ export default function Page() {
     resolver: zodResolver(loginSchema),
   })
 
-  async function onSubmit(value: LoginFormValue) {
-    try {
-      const res = await client.auth.login.$post(value)
-      const values = await res.json()
-      if (values.status === "ok") {
-        toast.success("Login successful")
-        router.refresh()
-      }
-    } catch (error) {
-      if (error instanceof HTTPException) {
-        toast.error(error.message)
-      }
-      console.error(error)
+  async function onSubmit(values: LoginFormValue) {
+    const response = await loginAction(values)
+    if (response.success) {
+      toast.success(response.message)
+      router.refresh()
+    } else {
+      toast.error(response.message)
     }
   }
 

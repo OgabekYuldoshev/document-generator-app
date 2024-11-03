@@ -1,12 +1,12 @@
 "use client"
 import React from "react"
 import useAlert from "@/hooks/useAlert"
-import { deleteSession } from "@/lib/session"
 import { Button } from "./ui/button"
-import { LogOut, PanelRight, PanelRightOpen, SquarePen } from "lucide-react"
-import { Tooltip, TooltipProvider } from "./ui/tooltip"
+import { LogOut } from "lucide-react"
+import { TooltipProvider } from "./ui/tooltip"
 import CollapsedButton from "./collapsed-button"
 import NewDocumentButton from "./new-document-button"
+import { logoutAction } from "@/app/(auth)/auth/actions"
 
 export default function Sidebar() {
   const [AlertProvider, onAlert] = useAlert()
@@ -18,7 +18,7 @@ export default function Sidebar() {
         "Logging out will end your current session. Do you want to continue?",
       onResolve(value) {
         if (value) {
-          deleteSession()
+          logoutAction()
         }
       },
     })

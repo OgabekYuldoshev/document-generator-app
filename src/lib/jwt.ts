@@ -1,4 +1,5 @@
 import 'server-only'
+
 import { SignJWT, jwtVerify, type JWTPayload } from 'jose';
 const secret = new TextEncoder().encode(process.env.TOKEN_SECRET_KEY || '');
 

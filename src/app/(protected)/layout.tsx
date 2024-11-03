@@ -1,11 +1,11 @@
 import Sidebar from "@/components/sidebar"
 import { GlobalStateProvider } from "@/hooks/useGlobalState"
-import { userSession } from "@/lib/session"
 import { redirect } from "next/navigation"
 import type { PropsWithChildren } from "react"
+import { getSessionAction } from "../(auth)/auth/actions"
 
 export default async function ProtectedRoot({ children }: PropsWithChildren) {
-  const session = await userSession()
+  const session = await getSessionAction()
 
   if (!session.success) redirect("/auth")
 

@@ -54,13 +54,15 @@ export default function Page() {
 
   return (
     <Form {...form}>
-      <Card className="w-[350px]">
+      <Card className="max-w-[500px] w-full mx-2.5">
         <CardHeader>
-          <CardTitle>Sign In</CardTitle>
-          <CardDescription>Login to your account</CardDescription>
+          <CardTitle>Welcome Back!</CardTitle>
+          <CardDescription>
+            Sign in to access your account and continue where you left off.
+          </CardDescription>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <CardContent>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <FormField
@@ -93,19 +95,16 @@ export default function Page() {
                 />
               </div>
             </div>
-          </form>
-        </CardContent>
-        <CardFooter className="flex justify-end">
-          <Button
-            disabled={form.formState.isSubmitting}
-            onClick={form.handleSubmit(onSubmit)}
-          >
-            {form.formState.isSubmitting && (
-              <Loader2 className="animate-spin" />
-            )}
-            Login
-          </Button>
-        </CardFooter>
+          </CardContent>
+          <CardFooter className="flex justify-end">
+            <Button type="submit" disabled={form.formState.isSubmitting}>
+              {form.formState.isSubmitting && (
+                <Loader2 className="animate-spin" />
+              )}
+              Login
+            </Button>
+          </CardFooter>
+        </form>
       </Card>
     </Form>
   )

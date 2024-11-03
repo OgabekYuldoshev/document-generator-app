@@ -8,6 +8,8 @@ export default async function AuthLayout({ children }: PropsWithChildren) {
   if (session.success) redirect("/")
 
   return (
-    <div className="w-full h-screen grid place-content-center">{children}</div>
+    <div className="w-full h-screen flex items-center justify-center">
+      {children}
+    </div>
   )
 }

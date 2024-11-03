@@ -28,8 +28,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={cn(inter.variable, eb_garamond.variable)}>
-      <body className="antialiased dark">
+    <html lang="en">
+      <body
+        className={cn(inter.variable, eb_garamond.variable, "antialiased dark")}
+      >
         <Providers>{children}</Providers>
       </body>
     </html>

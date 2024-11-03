@@ -15,8 +15,9 @@ export const baseClient = hc<AppType>(getBaseUrl(), {
 		const response = await fetch(input, { ...init, cache: "no-store" });
 
 		if (!response.ok) {
+			const res = await response.json() as HTTPException
 			throw new HTTPException(response.status as StatusCode, {
-				message: response.statusText,
+				message: res.message,
 				res: response,
 			});
 		}

@@ -52,6 +52,15 @@ const Documents = () => {
 
   return (
     <ul className="grid xl:grid-cols-5 lg:grid-cols-4 grid-cols-3 gap-2 mt-6">
+      {!data.length && (
+        <li className="flex flex-col items-center justify-center xl:col-span-5 lg:col-span-4 col-span-3">
+          <FileText />
+          <h3 className="font-bold mt-2">No document found</h3>
+          <p className="text-muted-foreground">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </p>
+        </li>
+      )}
       {data.map((document) => (
         <li
           key={document.id}

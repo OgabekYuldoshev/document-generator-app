@@ -10,7 +10,10 @@ export default function Page() {
 
   return (
     <div className="flex flex-col">
-      <PageHeader items={[{ label: 'Documents', href: "/" }, item.title]} />
+      <PageHeader items={[
+        { label: 'Documents', href: "/" },
+        item.title
+      ]} />
       <div className="mx-auto w-full max-w-screen-xl">
         <Title
           title={item.title}

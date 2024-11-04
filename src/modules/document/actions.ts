@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import sift from "sift";
 import { firstBy } from "thenby"
 import type { z } from "zod";
-import type { newDocumentSchema } from "./schema";
+import type { newDocumentSchema, updateDocumentSchema } from "./schema";
 
 export async function createNewDocumentAction(values: z.infer<typeof newDocumentSchema>) {
   try {
@@ -49,5 +49,21 @@ export async function getDocumentAction(id: string) {
     return { success: true, document: { ...document, content } }
   } catch (error) {
     return { success: false, document: null }
+  }
+}
+
+export async function updateDocumentMetaAction({ id, document }: {
+  id: string
+  document: Partial<z.infer<typeof updateDocumentSchema>>
+}) {
+  try {
+    await db.updateMetaDocument({
+      id,
+      document
+    })
+
+    return { success: true }
+  } catch (error) {
+    return { success: false }
   }
 }

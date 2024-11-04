@@ -3,9 +3,9 @@ import PageHeader from "@/components/page-header"
 import { Title } from "@/components/title"
 import { getAllDocumentsAction } from "@/modules/document/actions"
 import {
-  dehydrate,
   HydrationBoundary,
   QueryClient,
+  dehydrate,
 } from "@tanstack/react-query"
 import React from "react"
 

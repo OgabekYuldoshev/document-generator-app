@@ -8,7 +8,7 @@ import {
 import { HTTPException } from "hono/http-exception"
 import { type PropsWithChildren, useState } from "react"
 import { Toaster } from "./ui/sonner"
-import NextNProgress from "nextjs-progressbar"
+
 export const Providers = ({ children }: PropsWithChildren) => {
   const [queryClient] = useState(
     () =>
@@ -31,13 +31,6 @@ export const Providers = ({ children }: PropsWithChildren) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <NextNProgress
-        color="#29D"
-        startPosition={0.3}
-        stopDelayMs={200}
-        height={3}
-        showOnShallow={true}
-      />
       {children}
       <Toaster richColors />
     </QueryClientProvider>
